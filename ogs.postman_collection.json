@@ -1,0 +1,294 @@
+{
+  "info": {
+    "_postman_id": "b5902e3a-a06c-46e4-a7de-241cda5e733a",
+    "name": "OGS Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "34331194"
+  },
+  "item": [
+    {
+      "name": "OGS login testing",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "// Save to environment\r",
+              "pm.environment.set(\"token\", jsonData.displayName);\r",
+              "pm.environment.set(\"email\", jsonData.email);\r",
+              "\r",
+              "// Status check\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// Email and Token check\r",
+              "pm.test(\"Email and Token is correct\", function () {\r",
+              "    pm.expect(jsonData.email).to.eql(pm.environment.get(\"email\"));\r",
+              "    pm.expect(jsonData.displayName).to.eql(pm.environment.get(\"token\"));\r",
+              "});\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"be@gmail.com\",\r\n    \"password\": \"@A123456\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCHDhFJyvCW53btSx_4t55ginqA_HbZYXY",
+          "protocol": "https",
+          "host": [
+            "identitytoolkit",
+            "googleapis",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "accounts:signInWithPassword"
+          ],
+          "query": [
+            {
+              "key": "key",
+              "value": "AIzaSyCHDhFJyvCW53btSx_4t55ginqA_HbZYXY"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ogs add to cart",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "console.log(\"jsonData:\", jsonData);\r",
+              "\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Product successfully added\", function () {\r",
+              "    pm.expect(jsonData.acknowledged).to.eql(true);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"productId\":\"681ccbb8def894959af74ac0\",\r\n  \"email\":\"{{email}}\",\r\n  \"name\":\"Samsung Galaxy Z Fold5\",\r\n  \"brand\":\"Samsung\",\r\n  \"category\":\"smartphone\",\r\n  \"description\":\"Samsung Galaxy Z Fold 5 is a foldable smartphone featuring a 7.6-inch foldable Dynamic AMOLED display, Snapdragon 888 chipset, triple-camera setup, and support for S Pen stylus.\",\r\n  \"photos\":\"https://static-01.daraz.com.bd/p/f3a182339ac46bc4a5992463b26d76cf.jpg_300x0q75.webp\",\r\n  \"price\":\"179999\"\r\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/cart",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "cart"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get product",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/cart?email=be@gmail.com",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "cart"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "be@gmail.com"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "random product add to cart",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const products = [\r",
+              "    {\r",
+              "        \"productId\": \"681ccbb8def894959af74ac0\",\r",
+              "        \"name\": \"Samsung Galaxy Z Fold5\",\r",
+              "        \"brand\": \"Samsung\",\r",
+              "        \"description\": \"Samsung Galaxy Z Fold 5 is a foldable smartphone featuring a 7.6-inch foldable Dynamic AMOLED display, Snapdragon 888 chipset, triple-camera setup, and support for S Pen stylus.\",\r",
+              "        \"price\": \"179999\",\r",
+              "        \"category\": \"smartphone\",\r",
+              "        \"photos\": \"https://static-01.daraz.com.bd/p/f3a182339ac46bc4a5992463b26d76cf.jpg_300x0q75.webp\"\r",
+              "    },\r",
+              "    {\r",
+              "        \"productId\": \"681ccbb8def894959af74ac5\",\r",
+              "        \"name\": \"Realme GT Master Edition\",\r",
+              "        \"brand\": \"Realme\",\r",
+              "        \"description\": \"The Realme GT Master Edition is a stylish smartphone designed by Naoto Fukasawa. It features a Qualcomm Snapdragon 778G chipset, a 6.43-inch Super AMOLED display, a triple-camera setup with a 64MP primary sensor, and a 4300mAh battery with 65W fast charging support.\",\r",
+              "        \"price\": \"39999\",\r",
+              "        \"category\": \"smartphone\",\r",
+              "        \"photos\": \"https://i.ibb.co/ymZK2dWB/82f187af4beef2ed8faff8dcf6570f82-jpg-720x720q80.jpg\"\r",
+              "    },\r",
+              "    {\r",
+              "        \"productId\": \"681ccbb8def894959af74ac8\",\r",
+              "        \"name\": \"iPhone 13\",\r",
+              "        \"brand\": \"iPhone\",\r",
+              "        \"description\": \"The iPhone 13 is Apple's mainstream smartphone featuring a 6.1-inch Super Retina XDR display, A15 Bionic chip, dual-camera system with Night mode, and up to 512GB of storage.\",\r",
+              "        \"price\": \"799\",\r",
+              "        \"category\": \"smartphone\",\r",
+              "        \"photos\": \"data:image/jpeg;base64,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\"\r",
+              "    }\r",
+              "];\r",
+              "\r",
+              "const randomIndex = Math.floor(Math.random() * products.length);\r",
+              "const product = products[randomIndex];\r",
+              "\r",
+              "pm.variables.set(\"productId\", product.productId);\r",
+              "pm.variables.set(\"name\", product.name);\r",
+              "pm.variables.set(\"brand\", product.brand);\r",
+              "pm.variables.set(\"category\", product.category);\r",
+              "pm.variables.set(\"description\", product.description);\r",
+              "pm.variables.set(\"photos\", product.photos);\r",
+              "pm.variables.set(\"price\", product.price);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "console.log(\"jsonData:\", jsonData);\r",
+              "\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Product successfully added\", function () {\r",
+              "    pm.expect(jsonData.acknowledged).to.eql(true);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"productId\": \"{{productId}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"name\": \"{{name}}\",\r\n    \"brand\": \"{{brand}}\",\r\n    \"category\": \"{{category}}\",\r\n    \"description\": \"{{description}}\",\r\n    \"photos\": \"{{photos}}\",\r\n    \"price\": \"{{price}}\"\r\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/cart",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "cart"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ogs get products",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{base_url}}/product",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "product"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
