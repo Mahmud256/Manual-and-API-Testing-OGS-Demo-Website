@@ -69,11 +69,14 @@ Online gift shop platforms typically allow users to browse products, add items t
 ## 📁 Project Structure
 
 📦 project-root
-┣ 📄 OGS_Test_Cases.xlsx
+┣ 📄 OGS_Test_Cases.
+
 ┣ 📂 newman_reports/
 ┃ ┗ 📄 Newman Execution Reports
+
 ┣ 📂 postman_collection/
 ┃ ┗ 📄 OGS_Collection.json
+
 ┣ 📜 README.md
 
 ---
