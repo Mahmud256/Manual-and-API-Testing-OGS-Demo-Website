@@ -128,13 +128,13 @@ npm install -g newman
 ### Step 2: Run Collection
 
 ```bash
-newman run postman_collection/OGS_Collection.json
+newman run ogs.postman_collection.json
 ```
 
 ### Step 3: Generate Report
 
 ```bash
-newman run postman_collection/OGS_Collection.json -r cli,html
+newman run ogs.postman_collection.json -r htmlextra
 ```
 
 ---
