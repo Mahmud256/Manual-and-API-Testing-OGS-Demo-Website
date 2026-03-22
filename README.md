@@ -12,7 +12,7 @@ This project focuses on testing an **Online Gift Shop E-commerce Website** throu
 
 The purpose of this project is to ensure that the application functions correctly, delivers a smooth user experience, and handles backend API requests properly.
 
-Online gift shop platforms typically allow users to browse products, add items to cart, and complete purchases easily ([MobiCommerce][1]).
+Online gift shop platforms typically allow users to browse products, add items to cart, and complete purchases easily.
 
 ---
 
