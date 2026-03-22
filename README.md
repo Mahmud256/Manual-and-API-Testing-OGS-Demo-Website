@@ -13,7 +13,9 @@ This project demonstrates end-to-end Software Quality Assurance (SQA) on an E-co
 It includes:
 
 ✅ Manual Testing (UI + Functional)
+
 ✅ API Testing using Postman
+
 ✅ Automated API Testing using Newman
 
 The goal is to ensure system reliability, detect bugs, and validate API responses.
