@@ -6,7 +6,7 @@
 
 ---
 
-📌 Project Overview
+## 📌 Project Overview
 
 This project demonstrates end-to-end Software Quality Assurance (SQA) on an E-commerce platform.
 
@@ -21,13 +21,13 @@ It includes:
 The goal is to ensure system reliability, detect bugs, and validate API responses.
 ---
 
-## 🎯 Objectives
-
-* Validate core functionalities of the website
-* Perform end-to-end user flow testing (Browsing → Cart → Checkout)
-* Test API endpoints using Postman
-* Identify bugs and usability issues
-* Ensure data consistency between frontend and backend
+## 🎯 Key Features Tested
+* User Registration & Login
+* Product Browsing
+* Add to Cart
+* Cart Management
+* Checkout Process
+* Payment Flow (Success / Failed / Cancel)
 
 ---
 
